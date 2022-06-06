@@ -48,6 +48,10 @@ async function run() {
       .filter((r: any) => domainRegex.test(r.name))
       .map((r: any) => ({ id: r.id, name: r.name }));
 
+    records.forEach((record: any) =>
+      console.log(`Updating record:     ${record.name}  ->  ${ip as string}`)
+    );
+
     await Promise.all(
       records.map(({ id, name }) =>
         client.put(`/zones/${zoneId}/dns_records/${id}`, {
